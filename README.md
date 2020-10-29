@@ -14,5 +14,5 @@
 ## Execution
 - To run the server use the command
 	```bash
-	$ deno run --allow-net server.ts
+	$ deno run --allow-net --allow-read --allow-env -r server.ts
 	```
