@@ -1,8 +1,8 @@
-import { Application, Router, RouterContext } from "https://deno.land/x/oak@v5.0.0/mod.ts";
-import "https://deno.land/x/dotenv@v0.4.1/load.ts";
+import { Application, Router } from "https://deno.land/x/oak/mod.ts";
+import "https://deno.land/x/dotenv/load.ts";
 
-import { userMiddleware } from "./middleware/user.ts";
-import { authMiddleware } from "./middleware/auth.ts";
+import { userMiddleware } from "./middlewareUser.ts";
+// import { authMiddleware } from "./middlewareAuth.ts";
 
 import {
 	home, login, register, pLogin, pRegister, logout
