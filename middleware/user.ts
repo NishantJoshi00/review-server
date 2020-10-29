@@ -1,5 +1,5 @@
 import { Context } from "https://deno.land/x/oak@v5.0.0/mod.ts";
-import { validateJwt } from "https://deno.land/x/djwt/validate.ts"
+import { validateJwt } from "https://deno.land/x/djwt@v1.8/mod.ts"
 
 import {users, User} from "../users.ts";
 

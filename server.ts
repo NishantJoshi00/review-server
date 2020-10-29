@@ -1,4 +1,4 @@
-import { Application, Router, RouterContext } from "https://deno.lang/x/oak@v5.0.0/mod.ts";
+import { Application, Router, RouterContext } from "https://deno.land/x/oak@v5.0.0/mod.ts";
 import "https://deno.land/x/dotenv@v0.4.1/load.ts";
 
 import { userMiddleware } from "./middleware/user.ts";
@@ -20,7 +20,7 @@ router
 	.post("/register", pRegister)
 	.get("/logout", logout)
 
-app.addEventListener('error' evt => {
+app.addEventListener('error', evt => {
 	console.log(evt.error);
 })
 
