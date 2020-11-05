@@ -9,7 +9,7 @@ import { users, User } from './users.ts';
 export const home = async (ctx: RouterContext) => {
 	const currentUser = ctx.state.currentUser;
 	ctx.response.body = await renderFileToString(
-		`${Deno.cwd()}/assets/webpages/home.ejs`,
+		`${Deno.cwd()}/views/home.ejs`,
 		{
 			user: currentUser
 		}
@@ -18,7 +18,7 @@ export const home = async (ctx: RouterContext) => {
 
 export const login = async (ctx: RouterContext) => {
 	ctx.response.body = await renderFileToString(
-		`${Deno.cwd()}/assets/webpages/login.ejs`,
+		`${Deno.cwd()}/views/login.ejs`,
 		{
 			error: false,
 		}
@@ -27,7 +27,7 @@ export const login = async (ctx: RouterContext) => {
 
 export const register = async (ctx: RouterContext) => {
 	ctx.response.body = await renderFileToString(
-		`${Deno.cwd()}/assets/webpages/register.ejs`,
+		`${Deno.cwd()}/views/register.ejs`,
 		{}
 	)
 }
@@ -45,14 +45,14 @@ export const pLogin =  async (ctx: RouterContext) => {
 	const user = users.find((u: User) => u.username == username)
 	if (!user) {
 		ctx.response.body = await renderFileToString(
-			`${Deno.cwd()}/assets/webpages/login.ejs`,
+			`${Deno.cwd()}/views/login.ejs`,
 			{
 				error: 'Something went wrong, (hint: check your usename!)'
 			}
 		);
 	} else if (!compareSync(password, user.password)) {
 		ctx.response.body = await renderFileToString(
-			`${Deno.cwd()}/assets/webpages/login.ejs`,
+			`${Deno.cwd()}/views/login.ejs`,
 			{
 				error: 'Something went wrong, (hint: check your password!)'
 			}
@@ -93,7 +93,7 @@ export const pRegister = async (ctx: RouterContext) => {
 
 export const prRoute = async (ctx: RouterContext) => {
 	ctx.response.body = await renderFileToString(
-		`${Deno.cwd()}/assets/webpages/dashboard.ejs`,
+		`${Deno.cwd()}/views/dashboard.ejs`,
 		{}
 	)
 }

@@ -1,4 +1,4 @@
-import { Application, Router } from "https://deno.land/x/oak/mod.ts";
+import { Application, Router, send } from "https://deno.land/x/oak/mod.ts";
 import "https://deno.land/x/dotenv/load.ts";
 
 import { userMiddleware } from "./middlewareUser.ts";
@@ -10,6 +10,13 @@ import {
 
 const app = new Application();
 const router = new Router();
+
+// app.use(async (ctx) => {
+// 	await send(ctx, ctx.request.url.pathname,{
+// 		 root: `${Deno.cwd()}/static`,
+// 		 index: "../views/home.ejs",
+// 	  });
+//    });
 
 app.use(userMiddleware)
 router
