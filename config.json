@@ -1,0 +1,4 @@
+{
+	"JWT_KEY": "This is the secret hash for JWT",
+	"DB_URL": "mongodb://localhost:3432"
+}

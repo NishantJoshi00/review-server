@@ -16,3 +16,9 @@
 	```bash
 	$ deno run --allow-net --allow-read --allow-env -r server.ts
 	```
+- For starting the database integration, follow:
+	1. uncomment the code for import in connections.ts
+	2. use the following command for running the server
+		```bash
+		$ deno run --allow-net --allow-write --allow-read --allow-plugin --allow-env --unstable server.ts
+	3. check the documentation at [Docs](https://deno.land/x/mongo@v0.13.0)
