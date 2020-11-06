@@ -1,4 +1,4 @@
-import { Application, Router, send } from "https://deno.land/x/oak/mod.ts";
+import { Application, Router, send , Context} from "https://deno.land/x/oak/mod.ts";
 import "https://deno.land/x/dotenv/load.ts";
 
 import { userMiddleware } from "./middlewareUser.ts";
@@ -11,12 +11,20 @@ import {
 const app = new Application();
 const router = new Router();
 
-// app.use(async (ctx) => {
-// 	await send(ctx, ctx.request.url.pathname,{
-// 		 root: `${Deno.cwd()}/static`,
-// 		 index: "../views/home.ejs",
-// 	  });
-//    });
+// Serving files in the folder ./static with extension .js || .css
+app.use(async (ctx: Context, next: Function) => {
+
+	if (ctx.request.url.pathname.endsWith(".css") || 
+	ctx.request.url.pathname.endsWith(".js")) {
+		const fileName: string = ctx.request.url.pathname;
+		console.log(`Accessing: ${fileName}`);
+		await send(ctx, fileName, {
+			root: `${Deno.cwd()}/static`
+		});
+	} else {
+		await next()
+	}
+})
 
 app.use(userMiddleware)
 router
