@@ -5,7 +5,7 @@ import { userMiddleware } from "./middlewareUser.ts";
 // import { authMiddleware } from "./middlewareAuth.ts";
 
 import {
-	home, login, register, pLogin, pRegister, logout
+	home, login, register, pLogin, pRegister, logout, dbtest
 } from "./routes.ts"
 
 const app = new Application();

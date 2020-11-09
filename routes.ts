@@ -1,8 +1,23 @@
-import type { RouterContext } from "https://deno.land/x/oak/mod.ts";
+import type { Router, RouterContext } from "https://deno.land/x/oak/mod.ts";
 import { renderFileToString } from "https://deno.land/x/dejs/mod.ts";
 import { hashSync, compareSync} from "https://deno.land/x/bcrypt/mod.ts";
 import { create } from "https://deno.land/x/djwt/mod.ts";
 import { users, User } from './users.ts';
+
+// DB integration
+import { dbclient } from './connections.ts'
+const db = dbclient.database("website")
+
+interface UserAuth {
+	_id: {$oid: string},
+	fname: string,
+	lname: string,
+	email: string,
+	username: string,
+	password: string
+}
+
+const usertable = db.collection<UserAuth>("users");
 
 
 // GET routes without user authentication
@@ -69,23 +84,35 @@ export const pLogin =  async (ctx: RouterContext) => {
 }
 
 export const pRegister = async (ctx: RouterContext) => {
-	const { value } = ctx.request.body({ type: "form-data"});
-	const ff  = await value.read();
-	const text = ff.fields
+	const { value } = ctx.request.body({ type: "form"});
+	const formData: URLSearchParams = await value;
 
-	
-	const username = text["username"]
-	const name = text["name"]
-	const password = text["password"]
-	const hashedPassword = hashSync(password);
+	if (formData.get("user[pass]") == formData.get("user[repass]")) {
+		ctx.response.body = await renderFileToString(
+			`${Deno.cwd()}/views/login.ejs`,
+			{
+				error: 'Something went wrong, (hint: check your password!)'
+			}
+		);
+	}
+	const fname = formData.get("user[fname]");
+	const lname = formData.get("user[lname]");
+	const email = formData.get("user[email]");
+	const username = formData.get("user[username]");
+	const password = formData.get("user[pass]");
 
-	const user: User = {
+	if (fname == null || lname == null || email == null || username == null || password == null) return;
+	const userdata = {
+		fname,
+		lname,
+		email,
 		username,
-		name,
-		password: hashedPassword
-	};
-	// Add some middleware for adding extra layer of security before allowing any user
-	users.push(user);
+		password: hashSync(password)
+	}
+	usertable.insertOne(userdata)
+
+	// // Add some middleware for adding extra layer of security before allowing any user
+
 	ctx.response.redirect('/login');
 }
 
@@ -101,4 +128,8 @@ export const prRoute = async (ctx: RouterContext) => {
 export const logout = async (ctx: RouterContext) => {
 	ctx.cookies.delete('jwt');
 	ctx.response.redirect('/');
+}
+
+export const dbtest = async (ctx: RouterContext) => {
+	
 }
