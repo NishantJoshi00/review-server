@@ -87,7 +87,7 @@ export const pRegister = async (ctx: RouterContext) => {
 	const { value } = ctx.request.body({ type: "form"});
 	const formData: URLSearchParams = await value;
 
-	if (formData.get("user[pass]") == formData.get("user[repass]")) {
+	if (formData.get("user[pass]") != formData.get("user[repass]")) {
 		ctx.response.body = await renderFileToString(
 			`${Deno.cwd()}/views/login.ejs`,
 			{
