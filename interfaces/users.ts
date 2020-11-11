@@ -5,7 +5,9 @@ interface User {
 }
 const users: User[] = [];
 // TODO: Using an object instead of an array to access a database
-export type { User };
+
 export {
 	users
 }
+
+export type { User };

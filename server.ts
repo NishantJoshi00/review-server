@@ -1,12 +1,11 @@
 import { Application, Router, send , Context} from "https://deno.land/x/oak/mod.ts";
 import "https://deno.land/x/dotenv/load.ts";
-
-import { userMiddleware } from "./middlewareUser.ts";
+import { userMiddleware } from "./routes/middleware/middlewareUser.ts";
 // import { authMiddleware } from "./middlewareAuth.ts";
 
 import {
-	home, login, register, pLogin, pRegister, logout, dbtest
-} from "./routes.ts"
+	landing, login, register, pLogin, pRegister, logout
+} from "./routes/user.ts";
 
 const app = new Application();
 const router = new Router();
@@ -14,8 +13,8 @@ const router = new Router();
 // Serving files in the folder ./static with extension .js || .css
 app.use(async (ctx: Context, next: Function) => {
 
-	if (ctx.request.url.pathname.endsWith(".css") || 
-	ctx.request.url.pathname.endsWith(".js")) {
+	if (ctx.request.url.pathname.endsWith(".css") ||
+		ctx.request.url.pathname.endsWith(".js")) {
 		const fileName: string = ctx.request.url.pathname;
 		console.log(`Accessing: ${fileName}`);
 		await send(ctx, fileName, {
@@ -28,7 +27,7 @@ app.use(async (ctx: Context, next: Function) => {
 
 app.use(userMiddleware)
 router
-	.get("/", home)
+	.get("/", landing)
 	.get("/login", login)
 	.post("/login", pLogin)
 	.get("/register", register)
@@ -42,5 +41,9 @@ app.addEventListener('error', evt => {
 app.use(router.routes());
 app.use(router.allowedMethods());
 
-app.listen({port: 8080 });
-console.log("Started The application on : http://localhost:8080 ")
+const port = 8080
+app.listen({
+	port: port
+});
+
+console.log(`Started The application on : http://localhost:${port} `);

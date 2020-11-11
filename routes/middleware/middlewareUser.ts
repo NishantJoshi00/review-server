@@ -1,7 +1,7 @@
 import type { Context } from "https://deno.land/x/oak/mod.ts";
 import { verify } from "https://deno.land/x/djwt@v1.8/mod.ts"
-import { users, User } from "./users.ts";
-import { config } from "./connections.ts"
+import { users, User } from "../../interfaces/users.ts";
+import { config } from "../../connections.ts"
 export const userMiddleware = async(ctx: Context, next: Function) => {
 	const jwt = ctx.cookies.get('jwt')
 
