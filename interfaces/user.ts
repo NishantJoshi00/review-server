@@ -12,4 +12,6 @@ interface UserAuth {
 
 const usertable = db.collection<UserAuth>("users");
 
-export {usertable};
+export {
+	usertable
+};

@@ -2,8 +2,8 @@ import type { Router, RouterContext } from "https://deno.land/x/oak/mod.ts";
 import { renderFileToString } from "https://deno.land/x/dejs/mod.ts";
 import { hashSync, compareSync} from "https://deno.land/x/bcrypt/mod.ts";
 import { create } from "https://deno.land/x/djwt/mod.ts";
-import { users, User } from '../interfaces/users.ts';
-import {usertable} from '../interfaces/user.ts';
+// import { users, User } from '../interfaces/users.ts';
+import { usertable } from '../interfaces/user.ts';
 
 
 // GET route to landing page AKA signup page
@@ -46,8 +46,8 @@ export const pLogin =  async (ctx: RouterContext) => {
 
 	const username = text['username']
 	const password = text['password']
-
-	const user = users.find((u: User) => u.username == username)
+	// ?? CHANGE THE DB
+	const user = await usertable.findOne({username: username});
 	if (!user) {
 		ctx.response.body = await renderFileToString(
 			`${Deno.cwd()}/views/login.ejs`,
