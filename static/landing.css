@@ -171,6 +171,7 @@ header .navbar-content li a:hover {
 }
 
 .wrapper .svg-container .text {
+  text-align: center;
   margin-top: 2rem;
   width: 60%;
 }

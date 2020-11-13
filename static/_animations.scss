@@ -1,0 +1,26 @@
+
+$secondary-color: #F4a261;
+$accent:#2A9D8F;
+@keyframes updown{
+    from{
+        transform: translateY(-20px);
+    }to{
+        transform : translateY(0px);
+    }
+}
+
+@keyframes rightleft{
+    from{
+        transform: translateX(0);
+    }to{
+        transform : translateX(500px);
+    }
+}
+
+@keyframes boxmov{
+    from{
+        box-shadow: 100px 100px 0px $accent,140px 140px 0px $secondary-color, -5px 0 15px rgb(63, 63, 63) ;
+    }to{
+        box-shadow: 10px 10px 0px $accent,25px 25px 0px $secondary-color, -5px 0 15px rgb(63, 63, 63) ;
+    }
+}
