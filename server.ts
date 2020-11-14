@@ -7,6 +7,10 @@ import {
 	landing, login, register, pLogin, pRegister, logout
 } from "./routes/user.ts";
 
+import {
+	index
+} from "./routes/book.ts";
+
 const app = new Application();
 const router = new Router();
 
@@ -28,6 +32,7 @@ app.use(async (ctx: Context, next: Function) => {
 app.use(userMiddleware)
 router
 	.get("/", landing)
+	.get("/index",index)
 	.get("/login", login)
 	.post("/login", pLogin)
 	.get("/register", register)
