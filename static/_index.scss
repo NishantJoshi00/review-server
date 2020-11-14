@@ -1,0 +1,19 @@
+.carousel{
+    margin: 5vh auto;
+}
+
+.index-element{
+    margin-bottom: 2rem;
+    img{
+        max-height: 30rem;
+    }
+    .text-title{
+        text-align: center;
+        padding: 1rem 0;
+        a{
+            text-decoration: none;
+            color: $primary-color;
+            font-size: 1.2em;
+        }
+    }
+}

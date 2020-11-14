@@ -1,0 +1,56 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+.carousel {
+  margin: 5vh auto;
+}
+
+.index-element {
+  margin-bottom: 2rem;
+}
+
+.index-element img {
+  max-height: 30rem;
+}
+
+.index-element .text-title {
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.index-element .text-title a {
+  text-decoration: none;
+  color: #232323;
+  font-size: 1.2em;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #232323;
+}
+
+footer {
+  background-color: #F4a261;
+  bottom: 0;
+  width: 100vw;
+  height: 10vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.navbar-light {
+  background-color: #F4a261;
+}
+/*# sourceMappingURL=bookworm.css.map */
