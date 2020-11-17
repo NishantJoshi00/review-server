@@ -8,7 +8,7 @@ import {
 } from "./routes/user.ts";
 
 import {
-	index
+	index, newBook
 } from "./routes/book.ts";
 
 const app = new Application();
@@ -18,7 +18,8 @@ const router = new Router();
 app.use(async (ctx: Context, next: Function) => {
 
 	if (ctx.request.url.pathname.endsWith(".css") ||
-		ctx.request.url.pathname.endsWith(".js")) {
+		ctx.request.url.pathname.endsWith(".js") ||
+		ctx.request.url.pathname.endsWith(".jpg")) {
 		const fileName: string = ctx.request.url.pathname;
 		console.log(`Accessing: ${fileName}`);
 		await send(ctx, fileName, {
@@ -29,11 +30,12 @@ app.use(async (ctx: Context, next: Function) => {
 	}
 })
 
-app.use(userMiddleware)
+app.use(userMiddleware);
 router
 	.get("/", landing)
 	.get("/index",index)
 	.get("/login", login)
+	.get("/new",newBook)
 	.post("/login", pLogin)
 	.get("/register", register)
 	.post("/register", pRegister)

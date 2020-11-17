@@ -1,5 +1,6 @@
 @import 'variables';
 @import 'index';
+@import 'forms';
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
 *{
@@ -22,8 +23,27 @@ footer{
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 2rem;
+    z-index: 10;
 }
 
 .navbar-light{
     background-color: $secondary-color;
+    z-index: 10;
+    margin-bottom: 2rem;
+    input{
+        &:focus{
+            box-shadow: none;
+            border-color: $primary-color;
+        }
+    }
+    button{
+        border-color: $primary-color;
+        color: $primary-color;
+        &:hover{
+            background-color: $primary-color;
+            color: $secondary-color;
+            border-color: $primary-color;
+        }
+    }
 }

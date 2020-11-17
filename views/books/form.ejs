@@ -1,0 +1,29 @@
+<%- await include("./views/partials/header.ejs") %>
+
+<div class="entry-form">
+    <div class="card">
+        <h1>Add new book!</h1>
+        <form method="POST" action="/new">
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="book-name" name="book[name]" placeholder="Julius Caesar">
+              <label for="book-name" class="form-label">Name</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="book-author" name="book[author]" placeholder="William Shakespeare">
+              <label for="book-author" class="form-label">Author</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="book-name" name="book[image]" placeholder="Image link">
+                <label for="book-image" class="form-label">Image</label>
+            </div>
+            <div class=" mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description" rows="3" name="book[description]"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+    </div>
+</div>
+
+
+<%- await include("./views/partials/footer.ejs") %>

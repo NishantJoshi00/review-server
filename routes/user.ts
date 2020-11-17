@@ -21,9 +21,9 @@ export const landing = async (ctx: RouterContext) => {
 // GET route for login page
 export const login = async (ctx: RouterContext) => {
 	ctx.response.body = await renderFileToString(
-		`${Deno.cwd()}/views/login.ejs`,
+		`${Deno.cwd()}/views/user/login.ejs`,
 		{
-			error: false,
+			// error: false,
 		}
 	)
 }

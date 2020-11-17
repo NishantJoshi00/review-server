@@ -1,0 +1,26 @@
+<%- await include("./views/partials/header.ejs") %>
+
+<div class="entry-form">
+    <div class="card">
+        <h1>Login!</h1>
+        <form method="POST" action="/new">
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="book-name" name="user[username]" placeholder="abc_100">
+              <label for="book-name" class="form-label">Name</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="password" class="form-control" id="password" name="user[password]" placeholder="Password">
+              <label for="book-author" class="password">Password</label>
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="signed_in" name="keepSignedIn">
+                <label class="form-check-label" for="signed_in">Keep me signed in</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+    </div>
+</div>
+
+
+<%- await include("./views/partials/footer.ejs") %>
