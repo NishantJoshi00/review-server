@@ -66,6 +66,19 @@
           box-shadow: 0 0 0 0.25rem #f4a36186;
 }
 
+.addNew-btn {
+  width: 100%;
+  border-color: #F4a261;
+  color: #F4a261;
+  margin-bottom: 2rem;
+}
+
+.addNew-btn:hover {
+  background-color: #F4a261;
+  border-color: #F4a261;
+  color: #232323;
+}
+
 * {
   margin: 0;
   padding: 0;

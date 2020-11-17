@@ -24,13 +24,25 @@
                 }
             }
             button{
-                width: 100%;
-                background-color: $secondary-color;
-                border-color: $secondary-color;
-                &:focus{
-                    box-shadow: 0 0 0 0.25rem #f4a36186 ;
+                    width: 100%;
+                    background-color: $secondary-color;
+                    border-color: $secondary-color;
+                    &:focus{
+                        box-shadow: 0 0 0 0.25rem #f4a36186 ;
                 }
             }
         }
+    }
+}
+
+.addNew-btn{
+    width: 100%;
+    border-color: $secondary-color;
+    color: $secondary-color;
+    margin-bottom: 2rem;
+    &:hover{
+        background-color: $secondary-color;
+        border-color: $secondary-color;
+        color: $primary-color;
     }
 }
