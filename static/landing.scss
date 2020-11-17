@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 @import 'animations';
-$primary-color: #232323;
-$secondary-color: #F4a261;
-$accent:#2A9D8F;
+@import 'variables';
+
+
 body{
     margin: 0;
     padding: 0;
@@ -16,6 +16,22 @@ header{
     align-items: center;
     justify-content: space-between;
     margin: 0 10vh;
+    .logo{
+        display: flex;
+        align-items: center;
+        p{
+            color: $secondary-color;
+            font-weight: bold;
+            font-size: 1.7em;
+            text-shadow: 3px 3px 0 $accent;
+            animation: textmov 2s alternate infinite;
+        }
+        img{
+            height: 8vh;
+            margin-right: 1rem;
+        }
+        
+    }
     .navbar-content{
         list-style: none;
         display: flex;

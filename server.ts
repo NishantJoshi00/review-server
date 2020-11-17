@@ -19,9 +19,10 @@ app.use(async (ctx: Context, next: Function) => {
 
 	if (ctx.request.url.pathname.endsWith(".css") ||
 		ctx.request.url.pathname.endsWith(".js") ||
-		ctx.request.url.pathname.endsWith(".jpg")) {
+		ctx.request.url.pathname.endsWith(".jpg")||
+		ctx.request.url.pathname.endsWith(".png")) {
 		const fileName: string = ctx.request.url.pathname;
-		console.log(`Accessing: ${fileName}`);
+		// console.log(`Accessing: ${fileName}`);
 		await send(ctx, fileName, {
 			root: `${Deno.cwd()}/static`
 		});
