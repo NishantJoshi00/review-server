@@ -59,11 +59,17 @@
   width: 100%;
   background-color: #F4a261;
   border-color: #F4a261;
+  margin-bottom: 10px;
 }
 
 .entry-form .card form button:focus {
   -webkit-box-shadow: 0 0 0 0.25rem #f4a36186;
           box-shadow: 0 0 0 0.25rem #f4a36186;
+}
+
+.entry-form .card form span a {
+  margin-top: 10px;
+  text-decoration: none;
 }
 
 .addNew-btn {

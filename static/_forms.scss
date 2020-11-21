@@ -27,9 +27,14 @@
                     width: 100%;
                     background-color: $secondary-color;
                     border-color: $secondary-color;
+                    margin-bottom: 10px;
                     &:focus{
                         box-shadow: 0 0 0 0.25rem #f4a36186 ;
                 }
+            }
+            span a{
+                margin-top: 10px;
+                text-decoration: none;
             }
         }
     }
