@@ -1,5 +1,5 @@
 import { dbclient } from '../connections.ts'
-const db = dbclient.database("website")
+const db = dbclient.database("bookworm")
 
 interface UserAuth {
 	_id: {$oid: string},

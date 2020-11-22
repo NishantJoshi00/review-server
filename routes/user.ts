@@ -4,7 +4,7 @@ import { hashSync, compareSync} from "https://deno.land/x/bcrypt/mod.ts";
 import { create } from "https://deno.land/x/djwt/mod.ts";
 // import { users, User } from '../interfaces/users.ts';
 import { usertable } from '../interfaces/user.ts';
-
+import { config } from '../connections.ts'
 
 // GET route to landing page AKA signup page
 export const landing = async (ctx: RouterContext) => {
@@ -39,15 +39,20 @@ export const register = async (ctx: RouterContext) => {
 
 // POST request without authentication (Login)
 export const pLogin =  async (ctx: RouterContext) => {
-	const { value } = ctx.request.body({ type: "form-data"});
-	const ff  = await value.read();
-	const text = ff.fields
+	const { value } = ctx.request.body({ type: "form"});
+	const formData: URLSearchParams = await value;
 
 
-	const username = text['username']
-	const password = text['password']
+	const username = formData.get('user[username]')
+	const password = formData.get('user[password]')
+	if (username == null || password == null) {
+		console.log("[POST (/login)] Error in entered Data")
+		return
+	}
 	// ?? CHANGE THE DB
 	const user = await usertable.findOne({username: username});
+	console.log(user)
+	console.log()
 	if (!user) {
 		ctx.response.body = await renderFileToString(
 			`${Deno.cwd()}/views/login.ejs`,
@@ -63,13 +68,14 @@ export const pLogin =  async (ctx: RouterContext) => {
 			}
 		);
 	} else {
+		console.log
 		const payload = {
 			iss: user.username,
 			exp: Date.now() + 1000 * 60 * 60
 		};
-		const jwt = await create({ alg: "HS512", typ: "JWT" }, payload, Deno.env.get('JWT_KEY') || '')
+		const jwt = await create({ alg: "HS512", typ: "JWT" }, payload, config['JWT_KEY'] || '')
 		ctx.cookies.set('jwt', jwt);
-		ctx.response.redirect('/');
+		ctx.response.redirect('/index');
 	}
 }
 
@@ -93,7 +99,11 @@ export const pRegister = async (ctx: RouterContext) => {
 	const username = formData.get("user[username]");
 	const password = formData.get("user[pass]");
 
-	if (fname == null || lname == null || email == null || username == null || password == null) return;
+	if (fname == null || lname == null || email == null || username == null || password == null) {
+		ctx.response.redirect('/')
+		console.log("[POST (/register)] Error in the formData")
+		return
+	}
 	const userdata = {
 		fname,
 		lname,
@@ -101,6 +111,8 @@ export const pRegister = async (ctx: RouterContext) => {
 		username,
 		password: hashSync(password)
 	}
+	console.log(userdata)
+	console.log("[POST (/register)] Adding to Database")
 	usertable.insertOne(userdata)
 
 	// // Add some middleware for adding extra layer of security before allowing any user

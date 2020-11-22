@@ -8,7 +8,7 @@ import {
 } from "./routes/user.ts";
 
 import {
-	index, newBook
+	index, newBook, postBook
 } from "./routes/book.ts";
 
 const app = new Application();
@@ -41,6 +41,7 @@ router
 	.get("/register", register)
 	.post("/register", pRegister)
 	.get("/logout", logout)
+	.post("/new", postBook)
 	// .get("/dashboard", authMiddleware, dash);
 app.addEventListener('error', evt => {
 	console.log(evt.error);

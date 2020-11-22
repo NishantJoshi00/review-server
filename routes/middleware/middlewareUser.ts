@@ -4,7 +4,6 @@ import { usertable } from "../../interfaces/user.ts";
 import { config } from "../../connections.ts"
 export const userMiddleware = async(ctx: Context, next: Function) => {
 	const jwt = ctx.cookies.get('jwt')
-
 	if (jwt) {
 		const data = await verify(jwt, config['JWT_KEY'] || '', 'HS512')
 		if (data) {
@@ -13,8 +12,10 @@ export const userMiddleware = async(ctx: Context, next: Function) => {
 		} else {
 			ctx.cookies.delete('jwt')
 		}
+		console.log("JWT Verified")
 	} else {
 		ctx.state.currentUser = null;
 	}
+	
 	await next();
 }
