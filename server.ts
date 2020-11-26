@@ -1,14 +1,14 @@
 import { Application, Router, send , Context} from "https://deno.land/x/oak/mod.ts";
 import "https://deno.land/x/dotenv/load.ts";
 import { userMiddleware } from "./routes/middleware/middlewareUser.ts";
-// import { authMiddleware } from "./routes/middleware/middlewareAuth.ts";
+import { authMiddleware } from "./routes/middleware/middlewareAuth.ts";
 
 import {
 	landing, login, register, pLogin, pRegister, logout
 } from "./routes/user.ts";
 
 import {
-	index, newBook, postBook
+	index, newBook, postBook, getBook, postComment
 } from "./routes/book.ts";
 
 const app = new Application();
@@ -42,6 +42,8 @@ router
 	.post("/register", pRegister)
 	.get("/logout", logout)
 	.post("/new", postBook)
+	.get("/books/:bookId", getBook)
+	.post("/new", authMiddleware, postComment)
 	// .get("/dashboard", authMiddleware, dash);
 app.addEventListener('error', evt => {
 	console.log(evt.error);
