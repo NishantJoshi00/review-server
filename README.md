@@ -30,3 +30,9 @@
   i.e. all routes regarding users go to `user.ts`. For routes regarding book records create a `book.ts`
 - `middleware` folder within the route folder holds all the middlewares including authentication
 - `static` and `views` is for front end 
+
+## Hosting `Heroku`
+- Similar to hosting for nodejs application
+- Use the following buildpack
+	`https://github.com/chibat/heroku-buildpack-deno.git`
+- 
