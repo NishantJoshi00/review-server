@@ -23,18 +23,38 @@
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="/index">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/">Sign Up</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/login">Login</a>
-                    </li>
+
 
                 </ul>
-                <form class="d-flex">
+                <% if(user != null) { %>
+                <div class="navbar-collapse collapse w-100 order-2 dual-collapse2">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="/">Sign Up</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="/login">Login</a>
+                        </li>
+                    </ul>
+                </div>
+                <% } else { %>
+
+                <div class="navbar-collapse collapse w-100 order-2 dual-collapse2">
+                    <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="/logout">Logout</a>
+                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="/">You are signed in as: <%= user.username %></a>
+                        </li>
+
+                    </ul>
+                </div>
+                <% } %>
+                <!-- <form class="d-flex">
                     <input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-primary" type="submit">Search</button>
-                </form>
+                </form> -->
             </div>
 
         </div>
