@@ -2,7 +2,7 @@ import { Application, Router, send , Context} from "https://deno.land/x/oak/mod.
 import "https://deno.land/x/dotenv/load.ts";
 import { userMiddleware } from "./routes/middleware/middlewareUser.ts";
 import { authMiddleware } from "./routes/middleware/middlewareAuth.ts";
-
+import { parse } from 'https://deno.land/std/flags/mod.ts';
 import {
 	landing, login, register, pLogin, pRegister, logout
 } from "./routes/user.ts";
@@ -51,10 +51,13 @@ app.addEventListener('error', evt => {
 
 app.use(router.routes());
 app.use(router.allowedMethods());
+const { args } = Deno;
+const DEFAULT_PORT = 8000;
+const argPort = parse(args).port;
 
-const port = 8080
+
 app.listen({
-	port: port
+	port: argPort ? Number(argPort) : DEFAULT_PORT
 });
 
-console.log(`Started The application on : http://localhost:${port} `);
+console.log(`Started The application on : http://localhost:${argPort ? Number(argPort) : DEFAULT_PORT} `);
