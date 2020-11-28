@@ -8,7 +8,7 @@ import { config } from '../connections.ts'
 
 // GET route to landing page AKA signup page
 export const landing = async (ctx: RouterContext) => {
-	const currentUser = ctx.state.currentUser;
+	const currentUser = await ctx.state.currentUser;
 	ctx.response.body = await renderFileToString(
 		`${Deno.cwd()}/views/landing.ejs`,
 		{
@@ -20,7 +20,7 @@ export const landing = async (ctx: RouterContext) => {
 
 // GET route for login page
 export const login = async (ctx: RouterContext) => {
-	const currentUser = ctx.state.currentUser;
+	const currentUser = await ctx.state.currentUser;
 	console.log(currentUser)
 	ctx.response.body = await renderFileToString(
 		`${Deno.cwd()}/views/user/login.ejs`,
@@ -33,7 +33,7 @@ export const login = async (ctx: RouterContext) => {
 
 // Registration done at landing page maybe used later
 export const register = async (ctx: RouterContext) => {
-	const currentUser = ctx.state.currentUser;
+	const currentUser = await ctx.state.currentUser;
 	ctx.response.body = await renderFileToString(
 		`${Deno.cwd()}/views/register.ejs`,
 		{
