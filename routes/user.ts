@@ -20,10 +20,12 @@ export const landing = async (ctx: RouterContext) => {
 
 // GET route for login page
 export const login = async (ctx: RouterContext) => {
+	const currentUser = ctx.state.currentUser;
+	console.log(currentUser)
 	ctx.response.body = await renderFileToString(
 		`${Deno.cwd()}/views/user/login.ejs`,
 		{
-			// error: false,
+			user: currentUser
 		}
 	)
 }
@@ -31,9 +33,12 @@ export const login = async (ctx: RouterContext) => {
 
 // Registration done at landing page maybe used later
 export const register = async (ctx: RouterContext) => {
+	const currentUser = ctx.state.currentUser;
 	ctx.response.body = await renderFileToString(
 		`${Deno.cwd()}/views/register.ejs`,
-		{}
+		{
+			user: currentUser
+		}
 	)
 }
 
@@ -41,7 +46,6 @@ export const register = async (ctx: RouterContext) => {
 export const pLogin =  async (ctx: RouterContext) => {
 	const { value } = ctx.request.body({ type: "form"});
 	const formData: URLSearchParams = await value;
-
 
 	const username = formData.get('user[username]')
 	const password = formData.get('user[password]')
@@ -57,14 +61,16 @@ export const pLogin =  async (ctx: RouterContext) => {
 		ctx.response.body = await renderFileToString(
 			`${Deno.cwd()}/views/login.ejs`,
 			{
-				error: 'Something went wrong, (hint: check your usename!)'
+				error: 'Something went wrong, (hint: check your usename!)',
+				user: null
 			}
 		);
 	} else if (!compareSync(password, user.password)) {
 		ctx.response.body = await renderFileToString(
 			`${Deno.cwd()}/views/login.ejs`,
 			{
-				error: 'Something went wrong, (hint: check your password!)'
+				error: 'Something went wrong, (hint: check your password!)',
+				user: null
 			}
 		);
 	} else {
