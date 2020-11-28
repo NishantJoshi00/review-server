@@ -5,7 +5,7 @@ import { renderFileToString } from "https://deno.land/x/dejs/mod.ts";
 // import { create } from "https://deno.land/x/djwt/mod.ts";
 import { booktable, comments } from '../interfaces/book.ts'
 
-import { ObjectId } from "https://deno.land/x/mongo/mod.ts";
+import { ObjectId } from "../connections.ts";
 
 export const index = async (ctx: RouterContext) => {
 	const currentUser = ctx.state.currentUser;
