@@ -1,0 +1,31 @@
+@import 'variables';
+
+.content-wrapper{
+    padding: 2rem;
+}
+
+.image-container{
+    padding-bottom: 1rem;
+    p{
+        margin: 5px 1rem;
+    }
+    img{
+        min-width: 250px;
+        max-width: 25vw;
+    }
+}
+
+.card.bg-default{
+    background-color: $secondary-color;
+    margin-top: 1rem;
+    h6{
+        font-weight: bold;
+    }
+    .card-body{
+        background-color: #fff;
+    }
+}
+
+.comment{
+    margin-top: 1rem;
+}

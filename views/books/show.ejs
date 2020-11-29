@@ -1,0 +1,55 @@
+<%- await include("./views/partials/header.ejs", { user: user, book: book }) %>
+    <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="card content-wrapper">
+                        <h1>Psychology Of Money</h1>
+
+                        <h5>Description</h5>
+                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore dolore itaque accusantium deleniti quaerat, vero, fugit officia aspernatur hic aliquid, earum nesciunt. Nesciunt deserunt cum eius aspernatur corrupti quae. Amet nobis porro aliquid ea culpa exercitationem provident aliquam. Impedit recusandae ad cumque sapiente! Porro possimus, obcaecati blanditiis sunt repellat culpa.</p>
+                    </div>
+                    <div class="card text-black bg-default mb-3">
+                        <div class="card-header">Reviews</div>
+                    </div>
+                    <div class="card comment">
+                        <div class="card-body">
+                            <h6 class="card-title">Nishant</h6>
+                            <p class="card-text">Best book i've ever read</p>
+                          </div>
+                    </div>
+                    <div class="card comment">
+                        <div class="card-body">
+                            <h6 class="card-title">Prathamesh</h6>
+                            <p class="card-text">A genuine work of art!</p>
+                          </div>
+                    </div>
+                    <div class="card comment">
+                        <div class="card-body">
+                            <h6 class="card-title">Shubham</h6>
+                            <p class="card-text">Most Informative book that I've read</p>
+                          </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="image-container card">
+                        <img class="card-img-top" src="https://images-na.ssl-images-amazon.com/images/I/81cpDaCJJCL.jpg" alt="">
+                        <p class="card-text">
+                            <b>Author</b>: Morgan Housel
+                        </p>
+                        <p class="card-text">
+                            <b>Genre</b>: Informative
+                        </p>
+                        <p class="card-text">
+                            <b>Number of pages</b>: 120
+                        </p>
+                        <p class="card-text">
+                            <b>Launch Year:</b>2002
+                        </p>
+                    </div>
+                </div>
+            </div>
+    
+    </div>
+
+
+    <%- await include("./views/partials/footer.ejs") %>
