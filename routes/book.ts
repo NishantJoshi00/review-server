@@ -9,6 +9,7 @@ import { ObjectId } from "../connections.ts";
 
 export const index = async (ctx: RouterContext) => {
 	const currentUser = await ctx.state.currentUser;
+	console.log("[GET ] New Book")
 	ctx.response.body = await renderFileToString(
 		`${Deno.cwd()}/views/books/index.ejs`,
 		{
@@ -57,23 +58,26 @@ export const postBook = async (ctx: RouterContext) => {
 	console.log(entry)
 	console.log("[POST (/new)] Adding to Database")
 	const { $oid } = await booktable.insertOne(entry);
-	ctx.response.redirect(`/index`)
+	ctx.response.redirect(`/books/${$oid}`)
 	console.log($oid)
 }
 
 export const getBook = async (ctx: RouterContext) => {
-	// const { bookId } = helpers.getQuery(ctx);
-	const currentUser = ctx.state.currentUser;
-	// const book = booktable.findOne({"_id": ObjectId(bookId)});
-	// if (!book) {
-	// 	ctx.response.redirect("/index")
-	// }
 
+	const { bookId } = ctx.params;
+	if (bookId == null) return
+	console.log(bookId)
+	const currentUser = ctx.state.currentUser;
+	const book = await booktable.findOne({"_id": ObjectId(bookId)});
+	if (!book) {
+		ctx.response.redirect("/index")
+	}
+	console.log(book);
 	ctx.response.body = await renderFileToString(
 		`${Deno.cwd()}/views/books/show.ejs`,
 		{
 			user: currentUser,
-			// book: book
+			book: book
 
 		}
 	);

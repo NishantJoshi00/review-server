@@ -3,10 +3,10 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="card content-wrapper">
-                        <h1>Psychology Of Money</h1>
+                        <h1><%= book.name %></h1>
 
                         <h5>Description</h5>
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore dolore itaque accusantium deleniti quaerat, vero, fugit officia aspernatur hic aliquid, earum nesciunt. Nesciunt deserunt cum eius aspernatur corrupti quae. Amet nobis porro aliquid ea culpa exercitationem provident aliquam. Impedit recusandae ad cumque sapiente! Porro possimus, obcaecati blanditiis sunt repellat culpa.</p>
+                        <p><%= book.description %></p>
                     </div>
                     <div class="card text-black bg-default mb-3">
                         <div class="card-header">Reviews</div>
@@ -32,18 +32,18 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="image-container card">
-                        <img class="card-img-top" src="https://images-na.ssl-images-amazon.com/images/I/81cpDaCJJCL.jpg" alt="">
+                        <img class="card-img-top" src="<%= book.image %>" alt="">
                         <p class="card-text">
-                            <b>Author</b>: Morgan Housel
+                            <b>Author</b>: <%= book.author %>
                         </p>
                         <p class="card-text">
-                            <b>Genre</b>: Informative
+                            <b>Genre</b>: <%= book.genre %>
                         </p>
                         <p class="card-text">
-                            <b>Number of pages</b>: 120
+                            <b>Number of pages</b>: <%= book.pageCount %>
                         </p>
                         <p class="card-text">
-                            <b>Launch Year:</b>2002
+                            <b>Launch Year:</b><%= book.launchYear %>
                         </p>
                     </div>
                 </div>
