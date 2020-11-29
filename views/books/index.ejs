@@ -39,22 +39,17 @@
     <a href="/new" class="btn btn-lg btn-outline-primary addNew-btn">Contribute to Bookworm</a>
 
     <div class="row">
-          <div class="col col-lg-3">
-              <div class="card index-element">
 
-                    <img src="https://images-na.ssl-images-amazon.com/images/I/81cpDaCJJCL.jpg" alt="">
-                    <div class="text-title">
-                        <a href="#">Psychology of money</a>
-                    </div>      
-              </div>
-          </div>
           <% books.forEach((book)=>{ %>
             <div class="col col-lg-3">
               <div class="card index-element">
 
                     <img src="<%= book.image %>" alt="">
                     <div class="text-title">
-                        <a href="/books/<% book._id %>"><%= book.name %></a>
+                        <a href='/books/<%= book._id["$oid"] %>' class="book-link">
+                           <p><%= book.name %></p>
+                           <span class="link-glyph"><i class="far fa-question-circle"></i> Know more</span>
+                        </a>
                     </div>      
               </div>
           </div>

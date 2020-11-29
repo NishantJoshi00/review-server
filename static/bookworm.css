@@ -22,6 +22,15 @@
   font-size: 1.2em;
 }
 
+.index-element .text-title a .link-glyph {
+  color: #0d6efd;
+  font-size: 0.9em;
+}
+
+.index-element .text-title a .link-glyph:hover {
+  text-decoration: underline;
+}
+
 .entry-form {
   width: 100vw;
   height: 80vh;

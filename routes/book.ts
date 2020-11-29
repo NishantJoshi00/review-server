@@ -39,7 +39,6 @@ export const postBook = async (ctx: RouterContext) => {
 	const launchYear = Number(formData.get("book[launchYear]"));
 	const pageCount = Number(formData.get("book[pageCount]"));
 	
-	console.log(name,author,image,description,genre,launchYear,pageCount)
 	if (!name || !author || !image || !description || !genre || !launchYear || !pageCount) {
 		console.log("[POST (/new)] Error in one of the fields")
 		return
@@ -63,18 +62,18 @@ export const postBook = async (ctx: RouterContext) => {
 }
 
 export const getBook = async (ctx: RouterContext) => {
-	const { bookId } = helpers.getQuery(ctx);
+	// const { bookId } = helpers.getQuery(ctx);
 	const currentUser = ctx.state.currentUser;
-	const book = booktable.findOne({"_id": ObjectId(bookId)});
-	if (!book) {
-		ctx.response.redirect("/index")
-	}
+	// const book = booktable.findOne({"_id": ObjectId(bookId)});
+	// if (!book) {
+	// 	ctx.response.redirect("/index")
+	// }
 
 	ctx.response.body = await renderFileToString(
 		`${Deno.cwd()}/views/books/show.ejs`,
 		{
 			user: currentUser,
-			book: book
+			// book: book
 
 		}
 	);
