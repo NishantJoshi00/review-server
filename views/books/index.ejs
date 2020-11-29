@@ -1,4 +1,4 @@
-<%- await include("./views/partials/header.ejs", { user: user }) %>
+<%- await include("./views/partials/header.ejs", { user: user, books: books }) %>
 
 <div class="container">
 
@@ -48,7 +48,18 @@
                     </div>      
               </div>
           </div>
-          <div class="col col-lg-3">
+          <% books.forEach((book)=>{ %>
+            <div class="col col-lg-3">
+              <div class="card index-element">
+
+                    <img src="<%= book.image %>" alt="">
+                    <div class="text-title">
+                        <a href="/books/<% book._id %>"><%= book.name %></a>
+                    </div>      
+              </div>
+          </div>
+          <% }); %>
+          <!-- <div class="col col-lg-3">
               <div class="card index-element">
                  <img src="https://images-na.ssl-images-amazon.com/images/I/91VokXkn8hL.jpg" alt="">
                  <div class="text-title">
@@ -87,7 +98,7 @@
                     <a href="#">The Martian</a>
                  </div>      
               </div>
-          </div>
+          </div> -->
     </div>
     <a href="/new" class="btn btn-lg btn-outline-primary addNew-btn">+ Add more..</a>
 </div>

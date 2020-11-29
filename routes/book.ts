@@ -32,14 +32,14 @@ export const postBook = async (ctx: RouterContext) => {
 	const { value } = ctx.request.body({ type: "form"});
 	const formData: URLSearchParams = await value;
 	const name = formData.get("book[name]")
-	const author = formData.get("book[name]")
+	const author = formData.get("book[author]")
 	const image = formData.get("book[image]")
 	const description = formData.get("book[description]")
 	const genre = formData.get("book[genre]");
 	const launchYear = Number(formData.get("book[launchYear]"));
 	const pageCount = Number(formData.get("book[pageCount]"));
 	
-
+	console.log(name,author,image,description,genre,launchYear,pageCount)
 	if (!name || !author || !image || !description || !genre || !launchYear || !pageCount) {
 		console.log("[POST (/new)] Error in one of the fields")
 		return
@@ -58,7 +58,8 @@ export const postBook = async (ctx: RouterContext) => {
 	console.log(entry)
 	console.log("[POST (/new)] Adding to Database")
 	const { $oid } = await booktable.insertOne(entry);
-	ctx.response.redirect(`/books/${$oid}`)
+	ctx.response.redirect(`/index`)
+	console.log($oid)
 }
 
 export const getBook = async (ctx: RouterContext) => {
@@ -70,7 +71,7 @@ export const getBook = async (ctx: RouterContext) => {
 	}
 
 	ctx.response.body = await renderFileToString(
-		`${Deno.cwd()}/views/books/index.ejs`,
+		`${Deno.cwd()}/views/books/show.ejs`,
 		{
 			user: currentUser,
 			book: book
