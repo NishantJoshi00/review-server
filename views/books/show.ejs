@@ -29,6 +29,23 @@
                             <p class="card-text">Most Informative book that I've read</p>
                           </div>
                     </div>
+                    <div class="card text-black bg-default mb-3">
+                        <div class="card-header">Add comment</div>
+                    </div>
+                    <!-- <div class="card"> -->
+                        <div class="comment-form">
+                            <form action='/books/<%=book._id["$oid"]%>/comment' method="POST">
+                                <textarea name="comment[body]" id="comment-body" rows="4"></textarea>
+                                <% if(user){ %>
+                                    <button type="submit"><i class="fas fa-paper-plane"></i>  Send</button>
+                                <% }else{ %>
+                                    <button type="submit" disabled><i class="fas fa-paper-plane"></i>  Send</button>
+                                    <p class="warning">*You need to login to comment on the post</p>
+                                <% } %>
+                            </form>
+                        </div>
+
+                    <!-- </div> -->
                 </div>
                 <div class="col-lg-4">
                     <div class="image-container card">

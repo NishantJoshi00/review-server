@@ -4,7 +4,7 @@ import { renderFileToString } from "https://deno.land/x/dejs/mod.ts";
 // import { hashSync, compareSync} from "https://deno.land/x/bcrypt/mod.ts"; 
 // import { create } from "https://deno.land/x/djwt/mod.ts";
 import { booktable, comments } from '../interfaces/book.ts'
-
+import { usertable } from '../interfaces/user.ts';
 import { ObjectId } from "../connections.ts";
 
 export const index = async (ctx: RouterContext) => {
@@ -88,24 +88,25 @@ export const getBook = async (ctx: RouterContext) => {
 
 export const postComment = async (ctx: RouterContext) => {
 	const { value } = ctx.request.body({ type: "form"});
-	const currentUser = ctx.state.currentUser;
+	const { bookId } = ctx.params;
+	if (bookId == null) return
+	console.log(bookId)
+	const currentUser = await ctx.state.currentUser;
 	const formData: URLSearchParams = await value;
-	const title = formData.get("comment[title]")
 	const body = formData.get("comment[body]")
 
-
-	if (!title || !body || !currentUser) {
+	// console.log(currentUser)
+	if (!body || !currentUser) {
 		console.log("[POST (/comment)] Error in one of the fields")
 		return
 	}
 
 	const entry = {
-		author: currentUser._id,
-		title,
+		author: currentUser._id["$oid"],
 		body
 	}
-	console.log(entry)
+	// console.log(entry)
 	console.log("[POST (/new)] Adding to Database")
 	await comments.insertOne(entry);
-	
+	ctx.response.redirect(`/index`)
 }

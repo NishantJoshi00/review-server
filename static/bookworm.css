@@ -33,7 +33,9 @@
 
 .entry-form {
   width: 100vw;
-  height: 80vh;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -94,6 +96,40 @@
   color: #232323;
 }
 
+.comment-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.comment-form textarea {
+  border-radius: 5px;
+  width: 100%;
+}
+
+.comment-form textarea:focus {
+  outline: auto 3px #F4a261;
+  border: auto 2px #F4a261;
+}
+
+.comment-form button {
+  background-color: #F4a261;
+  border-radius: 5px;
+  color: #232323;
+  padding: 0.4rem 2rem;
+  border: solid 2px #F4a261;
+  margin: 1rem 0;
+}
+
+.comment-form .warning {
+  color: whitesmoke;
+  font-size: 0.8em;
+}
+
 .content-wrapper {
   padding: 2rem;
 }
@@ -138,6 +174,7 @@
 body {
   font-family: 'Poppins', sans-serif;
   background-color: #232323;
+  min-height: 100%;
 }
 
 footer {

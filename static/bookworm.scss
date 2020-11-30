@@ -13,10 +13,11 @@
 body{
     font-family: 'Poppins', sans-serif;
     background-color: $primary-color;
+    min-height: 100%;
 }
 
 footer{
-    // position: absolute;
+    // position: sticky;
     background-color: $secondary-color;
     bottom: 0;
     width: 100vw;

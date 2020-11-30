@@ -2,7 +2,7 @@
 
 .entry-form{
     width: 100vw;
-    height: 80vh;
+    height: fit-content;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -50,4 +50,30 @@
         border-color: $secondary-color;
         color: $primary-color;
     }
+}
+
+.comment-form{
+    display: flex;
+    flex-direction: column;
+
+    textarea{
+        border-radius: 5px;
+        width: 100%;
+        &:focus{
+            outline: auto 3px $secondary-color; 
+            border: auto 2px $secondary-color; 
+        }
+    }
+    button{
+        background-color: $secondary-color;
+        border-radius: 5px;
+        color: $primary-color;
+        padding: 0.4rem 2rem;
+        border: solid 2px $secondary-color;
+        margin: 1rem 0;
+    } 
+    .warning{
+        color: whitesmoke;
+        font-size: 0.8em;
+    }  
 }

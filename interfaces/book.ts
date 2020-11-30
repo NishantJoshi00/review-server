@@ -8,7 +8,6 @@ interface Comment {
 		$ref: "users",
 		$id: {$oid: string}
 	}
-	title: string,
 	body: string
 }
 const comments = db.collection<Comment>("comments");

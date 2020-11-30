@@ -23,7 +23,7 @@ app.use(async (ctx: Context, next: Function) => {
 		ctx.request.url.pathname.endsWith(".png")) {
 		const fileName: string = ctx.request.url.pathname;
 		
-		console.log(`Accessing: ${fileName}`);
+		// console.log(`Accessing: ${fileName}`);
 		await send(ctx, fileName, {
 			root: `${Deno.cwd()}/static`
 		});
@@ -45,7 +45,7 @@ router
 	.get("/logout", logout)
 	.post("/new", postBook)
 	.get("/books/:bookId", getBook)
-	.post("/new", authMiddleware, postComment)
+	.post("/books/:bookId/comment", authMiddleware, postComment)
 	// .get("/dashboard", authMiddleware, dash);
 app.addEventListener('error', evt => {
 	console.log(evt.error);
