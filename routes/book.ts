@@ -9,12 +9,13 @@ import { ObjectId } from "../connections.ts";
 
 export const index = async (ctx: RouterContext) => {
 	const currentUser = await ctx.state.currentUser;
-	console.log("[GET ] New Book")
+	console.log("[GET /] New Book")
 	ctx.response.body = await renderFileToString(
 		`${Deno.cwd()}/views/books/index.ejs`,
 		{
 			user: currentUser,
 			books: await booktable.find({  })
+
 		}
 	);
 }
@@ -67,18 +68,39 @@ export const getBook = async (ctx: RouterContext) => {
 	const { bookId } = ctx.params;
 	if (bookId == null) return
 	console.log(bookId)
-	const currentUser = ctx.state.currentUser;
+	const currentUser = await ctx.state.currentUser;
+
+
+	/// <- RETRIVING THE COMMENT FROM THE BOOK
 	const book = await booktable.findOne({"_id": ObjectId(bookId)});
-	if (!book) {
+	if (book == null) {
 		ctx.response.redirect("/index")
+		return
 	}
-	console.log(book);
+	// console.log(book);
+	const comm = book.comments.map(async (x, y) => {
+		const value = await comments.findOne({_id: x});
+		return {
+			author: (await usertable.findOne({ _id: value?.author.$id }))?.username,
+			body: value?.body,
+			time: value?.time,
+		}
+	})
+	const comment: {
+		author: string | undefined;
+		body: string | undefined;
+		time: Date | null | undefined;
+	}[] = []
+	for (let i = 0; i < comm.length; i++) {
+		comment[i] = await comm[i]
+	}
+	// <-
 	ctx.response.body = await renderFileToString(
 		`${Deno.cwd()}/views/books/show.ejs`,
 		{
 			user: currentUser,
-			book: book
-
+			book: book,
+			comment: comment
 		}
 	);
 }
@@ -94,19 +116,28 @@ export const postComment = async (ctx: RouterContext) => {
 	const currentUser = await ctx.state.currentUser;
 	const formData: URLSearchParams = await value;
 	const body = formData.get("comment[body]")
-
-	// console.log(currentUser)
 	if (!body || !currentUser) {
 		console.log("[POST (/comment)] Error in one of the fields")
 		return
 	}
 
 	const entry = {
-		author: currentUser._id["$oid"],
-		body
+		author: currentUser._id,
+		body,
+		book: ObjectId(bookId)
 	}
-	// console.log(entry)
+	console.log(entry)
 	console.log("[POST (/new)] Adding to Database")
-	await comments.insertOne(entry);
+	const commentId = await comments.insertOne(entry);
+
+	// -> INSERTING THE COMMENT INTO THE BOOK
+	const book = await booktable.findOne({ _id: ObjectId(bookId) });
+	if (book == null) return
+	console.log(book);
+	book.comments.push(commentId);
+
+
+	await booktable.updateOne({ _id: ObjectId(bookId) }, { $set: { comments: book.comments } });
+	// <-
 	ctx.response.redirect(`/index`)
 }

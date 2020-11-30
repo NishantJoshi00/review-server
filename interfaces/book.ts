@@ -1,4 +1,4 @@
-import { dbclient } from "../connections.ts"
+import { dbclient, ObjectId } from "../connections.ts"
 const db = dbclient.database("bookworm")
 
 
@@ -8,7 +8,9 @@ interface Comment {
 		$ref: "users",
 		$id: {$oid: string}
 	}
-	body: string
+	body: string,
+	time: null | Date,
+	book: ObjectId
 }
 const comments = db.collection<Comment>("comments");
 
@@ -22,10 +24,7 @@ interface BookStore {
 	genre: string,
 	pageCount: number,
 	launchYear: number,
-	comment: {
-		$ref: "comments",
-		$id: {$oid: string}
-	}[]
+	comments: ObjectId[] // HEAVY TO COMPUTE
 }
 
 
