@@ -80,10 +80,13 @@ export const getBook = async (ctx: RouterContext) => {
 	// console.log(book);
 	let coms = book.comments;
 	if (coms == undefined) coms = []
+	console.log("THis is Value: ")
 	const comm = book.comments.map(async (x, y) => {
 		const value = await comments.findOne({_id: x});
+		console.log(value)
+		console.log(await usertable.findOne({ _id: value?.author }))
 		return {
-			author: (await usertable.findOne({ _id: value?.author.$id }))?.username,
+			author: (await usertable.findOne({ _id: value?.author}))?.username,
 			body: value?.body,
 			time: value?.time,
 		}

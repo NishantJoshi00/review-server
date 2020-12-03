@@ -4,10 +4,7 @@ const db = dbclient.database("bookworm")
 
 interface Comment {
 	_id: {$oid: string},
-	author: {
-		$ref: "users",
-		$id: {$oid: string}
-	}
+	author: ObjectId
 	body: string,
 	time: null | Date,
 	book: ObjectId
