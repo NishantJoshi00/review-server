@@ -47,7 +47,11 @@
                     <img src="<%= book.image %>" alt="">
                     <div class="text-title">
                         <a href='/books/<%= book._id["$oid"] %>' class="book-link">
-                           <p><%= book.name %></p>
+                          <% if (book.name.length >25){ %>
+                           <p><%= book.name.substring(0,25) %>....</p>
+                          <% }else{ %>
+                            <p><%= book.name %></p>
+                          <% } %> 
                            <span class="link-glyph"><i class="far fa-question-circle"></i> Know more</span>
                         </a>
                     </div>      
