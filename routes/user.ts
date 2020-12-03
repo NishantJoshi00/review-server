@@ -25,7 +25,8 @@ export const login = async (ctx: RouterContext) => {
 	ctx.response.body = await renderFileToString(
 		`${Deno.cwd()}/views/user/login.ejs`,
 		{
-			user: currentUser
+			user: currentUser,
+			error: null
 		}
 	)
 }
