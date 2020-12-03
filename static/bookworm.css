@@ -109,6 +109,7 @@
 .comment-form textarea {
   border-radius: 5px;
   width: 100%;
+  padding: 1em;
 }
 
 .comment-form textarea:focus {

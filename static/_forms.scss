@@ -59,6 +59,7 @@
     textarea{
         border-radius: 5px;
         width: 100%;
+        padding: 1em;
         &:focus{
             outline: auto 3px $secondary-color; 
             border: auto 2px $secondary-color; 
