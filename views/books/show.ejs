@@ -11,6 +11,14 @@
                     <div class="card text-black bg-default mb-3">
                         <div class="card-header">Reviews</div>
                     </div>
+                    <% comment.forEach((com) => { %>
+                        <div class="card comment">
+                            <div class="card-body">
+                                <h6 class="card-title"><%= com.author %></h6>
+                                <p class="card-text"><%= com.body %></p>
+                              </div>
+                        </div>
+                    <% }); %>
                     <div class="card comment">
                         <div class="card-body">
                             <h6 class="card-title">Nishant</h6>
@@ -29,14 +37,7 @@
                             <p class="card-text">Most Informative book that I've read</p>
                           </div>
                     </div>
-                    <% comment.forEach((com) => { %>
-                        <div class="card comment">
-                            <div class="card-body">
-                                <h6 class="card-title"><%= com.author %></h6>
-                                <p class="card-text"><%= com.body %></p>
-                              </div>
-                        </div>
-                    <% }); %>
+
                     <div class="card text-black bg-default mb-3">
                         <div class="card-header">Add comment</div>
                     </div>
