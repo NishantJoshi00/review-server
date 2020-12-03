@@ -78,6 +78,8 @@ export const getBook = async (ctx: RouterContext) => {
 		return
 	}
 	// console.log(book);
+	let coms = book.comments;
+	if (coms == undefined) coms = []
 	const comm = book.comments.map(async (x, y) => {
 		const value = await comments.findOne({_id: x});
 		return {
@@ -92,7 +94,7 @@ export const getBook = async (ctx: RouterContext) => {
 		time: Date | null | undefined;
 	}[] = []
 	for (let i = 0; i < comm.length; i++) {
-		comment[i] = await comm[i]
+		comment[i] = await comm[comm.length - 1 - i];
 	}
 	// <-
 	ctx.response.body = await renderFileToString(
