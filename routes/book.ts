@@ -141,5 +141,5 @@ export const postComment = async (ctx: RouterContext) => {
 
 	await booktable.updateOne({ _id: ObjectId(bookId) }, { $set: { comments: book.comments } });
 	// <-
-	ctx.response.redirect(`/index`)
+	ctx.response.redirect(`/book/${bookId}`);
 }

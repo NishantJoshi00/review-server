@@ -51,28 +51,40 @@ export const pLogin =  async (ctx: RouterContext) => {
 	const password = formData.get('user[password]')
 	if (username == null || password == null) {
 		console.log("[POST (/login)] Error in entered Data")
-		return
+		ctx.response.body = await renderFileToString(
+			`${Deno.cwd()}/views/user/login.ejs`,
+			{
+				error: 'Missing Parameters',
+				user: null
+			});
+			ctx.response.redirect('/login');
+			return;
 	}
 	// ?? CHANGE THE DB
 	const user = await usertable.findOne({username: username});
 	console.log(user)
-	console.log()
 	if (!user) {
+
+		console.log("FAILED: 1")
+		console.log(`Going to: ${Deno.cwd()}/views/login.ejs`)
 		ctx.response.body = await renderFileToString(
-			`${Deno.cwd()}/views/login.ejs`,
+			`${Deno.cwd()}/views/user/login.ejs`,
 			{
 				error: 'Something went wrong, (hint: check your usename!)',
 				user: null
 			}
 		);
+		console.log("FAILED: 1")
 	} else if (!compareSync(password, user.password)) {
+		console.log("FAILED: 2")
 		ctx.response.body = await renderFileToString(
-			`${Deno.cwd()}/views/login.ejs`,
+			`${Deno.cwd()}/views/user/login.ejs`,
 			{
 				error: 'Something went wrong, (hint: check your password!)',
 				user: null
 			}
 		);
+		console.log("FAILED: 2")
 	} else {
 		console.log
 		const payload = {
@@ -82,6 +94,7 @@ export const pLogin =  async (ctx: RouterContext) => {
 		const jwt = await create({ alg: "HS512", typ: "JWT" }, payload, config['JWT_KEY'] || '')
 		ctx.cookies.set('jwt', jwt);
 		ctx.response.redirect('/index');
+		return
 	}
 }
 
@@ -93,7 +106,7 @@ export const pRegister = async (ctx: RouterContext) => {
 
 	if (formData.get("user[pass]") != formData.get("user[repass]")) {
 		ctx.response.body = await renderFileToString(
-			`${Deno.cwd()}/views/login.ejs`,
+			`${Deno.cwd()}/views/user/login.ejs`,
 			{
 				error: 'Something went wrong, (hint: check your password!)'
 			}
