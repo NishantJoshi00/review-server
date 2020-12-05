@@ -21,7 +21,7 @@ export const index = async (ctx: RouterContext) => {
 }
 
 export const newBook = async (ctx: RouterContext) => {
-	const currentUser = ctx.state.currentUser;
+	const currentUser = await ctx.state.currentUser;
 	ctx.response.body = await renderFileToString(
 		`${Deno.cwd()}/views/books/form.ejs`,
 		{
